@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bsh.community.user.dao.UserDao">
+
+	
+	
+ 	<select id="getUser" resultType="com.bsh.community.user.dto.UserDto">
+		<![CDATA[SELECT email as id, passwd as password, authority as roles FROM user_info WHERE email = #{username}]]>
+	</select> 
+	
+	<insert id="insertUser" parameterType="com.bsh.community.user.dto.UserDto">
+		<![CDATA[INSERT INTO user_info(email, passwd) values(#{id}, #{password}) ]]>
+	</insert>
+	
+	
+
+</mapper>

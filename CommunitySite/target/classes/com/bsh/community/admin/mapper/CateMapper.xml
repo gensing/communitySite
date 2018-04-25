@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bsh.community.admin.dao.CateDao">
+
+	<select id="getCateBoxList" resultType="String">
+		<![CDATA[ SELECT box_name FROM cate_box ORDER BY seq asc]]>
+	</select>
+	
+	 <select id="getCateList" parameterType="String" resultType="com.bsh.community.admin.dto.CateDto" >
+		SELECT seq, cate_name FROM cate WHERE box = ( SELECT seq FROM cate_box WHERE box_name = #{boxName}) ORDER BY seq asc
+	</select>
+	
+	
+	<insert id="setCate" parameterType="com.bsh.community.admin.dto.CateDto">
+		INSERT INTO cate(seq, cate_name, box) VALUES( ( SELECT nvl(MAX(seq),0) FROM cate ) + 1, #{cate_name}, ( SELECT seq FROM cate_box WHERE box_name = #{boxName} ))	
+	</insert>
+	
+	<insert id="setBox" parameterType="com.bsh.community.admin.dto.CateDto">
+		INSERT INTO cate_box(seq, box_name) VALUES( ( SELECT nvl(MAX(seq),0) FROM cate_box ) + 1, #{boxName})
+	</insert>
+
+	<delete id="delCate" parameterType="com.bsh.community.admin.dto.CateDto">
+		<![CDATA[ DELETE cate WHERE seq = ${seq} ]]>
+	</delete>
+	
+	<delete id="delBox" parameterType="com.bsh.community.admin.dto.CateDto">
+		<![CDATA[ DELETE cate_box WHERE box_name = #{boxName} ]]>
+	</delete>
+	
+	
+	<update id="updateCate" parameterType="com.bsh.community.admin.dto.CateDto">
+		UPDATE cate SET cate_name = #{cateName} where cate_name = #{oldCateName}
+	</update>
+	
+	<update id="updateBox" parameterType="com.bsh.community.admin.dto.CateDto">
+		UPDATE cate_box SET box_name = #{boxName} where box_name = #{oldBoxName}
+	</update> 
+	
+	<select id="getHomeList" parameterType="com.bsh.community.admin.dto.CateDto" resultType="com.bsh.community.board.dto.BoardDto" >		
+	<![CDATA[ SELECT a.* FROM (select * from board where cate = ${seq} order by seq desc) a WHERE ROWNUM <= 10 ]]>
+		
+	</select>
+	
+	<select id="confirmBox" parameterType="com.bsh.community.admin.dto.CateDto" resultType="Int" >		
+		select count(*) from cate_Box where box_name = #{boxName}
+	</select>
+	
+	<select id="confirmCate" parameterType="com.bsh.community.admin.dto.CateDto" resultType="Int" >		
+		select count(*) from cate where cate_name = #{cate_name} and box = ( SELECT seq FROM cate_box WHERE box_name = #{boxName})
+	</select>
+	
+	
+
+	
+</mapper> 
