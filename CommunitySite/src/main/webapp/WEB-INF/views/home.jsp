@@ -25,7 +25,7 @@
 			<p>기본적인 게시판으로서의 기능을 구현(summernote 적용)</p>
 			<p>추가할 기능들: 이메일 전송 기능을 통한 회원가입, 좋아요 기능(기능 구현은 완료 아직 미적용), 마이페이지, 관리자 회원관리 페이지</p>
 			<p>관리자 아이디: tensing@naver.com</p>
-			<p>관리자 비밀번호: 123</p>
+			<p>관리자 비밀번호: 1234</p>
 			<p>
 				<a class="btn btn-lg btn-primary" href="${contextPath}/admin/adminPage" role="button">관리자 페이지 &raquo;</a>
 			</p>

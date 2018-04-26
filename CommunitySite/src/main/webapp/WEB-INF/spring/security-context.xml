@@ -20,7 +20,7 @@
 		<intercept-url pattern="/admin/*" access="hasRole('ROLE_ADMIN')" />
 
 		<intercept-url pattern="/*"
-			access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
+			access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"  requires-channel="https"/>
 
 		<form-login login-page="/loginForm" default-target-url="/"
 			login-processing-url="/loginProcess" authentication-failure-url="/loginForm?m=err"
