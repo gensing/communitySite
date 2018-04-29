@@ -40,7 +40,7 @@
 						function getCate() {
 							$
 									.ajax({
-										url : 'http://localhost:8080/community/getCate',
+										url : '${contextPath}/getCate',
 										type : 'GET',
 										success : function(data) {
 											$(data)
